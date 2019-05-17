@@ -8,7 +8,7 @@
 #include<QMessageBox>
 #include<QByteArray>
 
-// seriport üzerinden gönderilen veriler dinlenir ve plaintext içine yazılır
+
 
 QSerialPort *serialport_okuma;
 
@@ -32,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->combobox_yazma_portunu_sec->addItem(port.portName());
     }
     connect(serialport_okuma,SIGNAL(readyRead()),this,SLOT(serialport_read()));
+        
     connect(ui->buton_veriyi_gonder,SIGNAL(clicked(bool)),this,SLOT(serialport_read()));
 
 }
@@ -46,6 +47,7 @@ MainWindow::~MainWindow()
 void MainWindow::serialport_read()
 
 {
+    // seriport üzerinden gönderilen veriler dinlenir ve plaintext içine yazılır
     ui->plainTextEdit->insertPlainText(serialport_okuma->readAll().toHex());
 }
 
